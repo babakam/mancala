@@ -12,6 +12,6 @@ public class UpdateBoardDto {
 
   private List<PitDto> pits;
   private String currentPLayer;
-  private boolean isFinished;
+  private boolean finished;
 
 }

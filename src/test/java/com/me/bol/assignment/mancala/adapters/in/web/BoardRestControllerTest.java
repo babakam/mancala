@@ -22,7 +22,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-class BoardControllerTest {
+class BoardRestControllerTest {
 
   @Autowired
   private MockMvc mockMvc;
@@ -31,7 +31,7 @@ class BoardControllerTest {
 
   @Test
   void shouldCreateANewBoard() throws Exception {
-    var mockResult = mockMvc.perform(get("/")
+    var mockResult = mockMvc.perform(get("/new")
             .contentType(MediaType.APPLICATION_JSON)
         ).andDo(print())
         .andExpect(status().isOk())
@@ -42,14 +42,14 @@ class BoardControllerTest {
       assertEquals(14, boardDto.getPits().size());
       assertEquals(0, boardDto.getPits().get(6).getStones());
       assertEquals(0, boardDto.getPits().get(13).getStones());
-      assertEquals("ONE", boardDto.getNextPlayer());
+      assertEquals("TWO", boardDto.getNextPlayer());
       assertFalse(boardDto.isFinished());
     });
   }
 
   @Test
   void shouldUpdate() throws Exception {
-    var firstMockResult = mockMvc.perform(get("/")
+    var firstMockResult = mockMvc.perform(get("/new")
             .contentType(MediaType.APPLICATION_JSON)
         ).andDo(print())
         .andExpect(status().isOk())
@@ -57,7 +57,7 @@ class BoardControllerTest {
 
     var firstOne = mapper.readValue(firstMockResult.getResponse().getContentAsString(), BoardDto.class);
 
-    var updateOne = UpdateBoardDto.builder().pits(firstOne.getPits()).currentPLayer("ONE").isFinished(false).build();
+    var updateOne = UpdateBoardDto.builder().pits(firstOne.getPits()).currentPLayer("ONE").finished(false).build();
 
     var secondMockResult = mockMvc.perform(put("/update/1")
             .contentType(MediaType.APPLICATION_JSON)

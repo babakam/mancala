@@ -12,42 +12,36 @@ import jakarta.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @AllArgsConstructor
-public class BoardController {
+@Slf4j
+public class BoardRestController {
 
-  public static final String BOARD = "board";
+  private static final String BOARD = "board";
+  private static final int STONES_FOR_EACH_PIT = 6;
   private final BoardPort boardPort;
   private final PitMapper pitMapper;
 
-  @GetMapping("/")
+  @GetMapping("/new")
   public BoardDto homeRequestHandler(HttpSession httpSession) {
     var boardDto = getFromSession(httpSession);
     if (Objects.nonNull(boardDto)) {
       return boardDto;
     } else {
-      var newBoard = boardPort.createNewBoard(6);
-
-      var createdBoardDto = BoardDto.builder()
-          .pits(Arrays.stream(newBoard.getPits()).map(pit -> PitDto.builder().stones(pit.getStones()).build()).toList())
-          .nextPlayer(newBoard.getCurrentPlayer().name())
-          .finished(newBoard.isGameFinished())
-          .build();
+      var createdBoardDto = generateNewBoardDto();
       httpSession.setAttribute(BOARD, createdBoardDto);
-
       return createdBoardDto;
     }
   }
 
   @PutMapping("/update/{selectedPit}")
-  @ResponseBody
   public BoardDto updateBoard(@RequestBody UpdateBoardDto sentUpdateBoardDto, @PathVariable int selectedPit, HttpSession httpSession) {
     var updatedBoard = boardPort.updateBoard(BoardUpdateRequest.builder()
         .board(new Board(pitMapper.toPit(sentUpdateBoardDto.getPits()),
@@ -65,6 +59,23 @@ public class BoardController {
     httpSession.setAttribute(BOARD, updateBoardDto);
 
     return updateBoardDto;
+  }
+
+  @GetMapping("/reset")
+  public BoardDto restHandler(HttpSession httpSession) {
+    httpSession.setAttribute(BOARD, null);
+    var createdBoardDto = generateNewBoardDto();
+    httpSession.setAttribute(BOARD, createdBoardDto);
+    return createdBoardDto;
+  }
+
+  private BoardDto generateNewBoardDto() {
+    var newBoard = boardPort.createNewBoard(STONES_FOR_EACH_PIT);
+    return BoardDto.builder()
+        .pits(Arrays.stream(newBoard.getPits()).map(pit -> PitDto.builder().stones(pit.getStones()).build()).toList())
+        .nextPlayer(newBoard.getCurrentPlayer().name())
+        .finished(newBoard.isGameFinished())
+        .build();
   }
 
   private BoardDto getFromSession(HttpSession httpSession) {

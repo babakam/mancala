@@ -26,14 +26,14 @@ class BoardHelperImplTest {
   private BoardHelperImpl boardHelperImpl;
 
   @Test
-  void pitShouldNotEmptyOrEmpty() {
+  void pitShouldNotEmpty() {
     var pits = generatePits(List.of(1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1));
     assertAll(() -> {
-      assertTrue(boardHelperImpl.isPitNotEmpty(pits, 1));
-      assertTrue(boardHelperImpl.isPitNotEmpty(pits, 2));
-      assertTrue(boardHelperImpl.isPitNotEmpty(pits, 8));
-      assertFalse(boardHelperImpl.isPitNotEmpty(pits, 4));
-      assertFalse(boardHelperImpl.isPitNotEmpty(pits, 9));
+      assertFalse(boardHelperImpl.isSelectedPitEmpty(pits, 1));
+      assertFalse(boardHelperImpl.isSelectedPitEmpty(pits, 2));
+      assertFalse(boardHelperImpl.isSelectedPitEmpty(pits, 8));
+      assertTrue(boardHelperImpl.isSelectedPitEmpty(pits, 4));
+      assertTrue(boardHelperImpl.isSelectedPitEmpty(pits, 9));
     });
   }
 

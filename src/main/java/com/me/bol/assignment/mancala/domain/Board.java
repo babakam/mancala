@@ -1,6 +1,6 @@
 package com.me.bol.assignment.mancala.domain;
 
-import static com.me.bol.assignment.mancala.domain.Player.ONE;
+import static com.me.bol.assignment.mancala.domain.Player.TWO;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -30,6 +30,6 @@ public class Board {
         pits[i] = new Pit(stoneForeEachPit);
       }
     }
-    currentPlayer = ONE;
+    currentPlayer = TWO;
   }
 }

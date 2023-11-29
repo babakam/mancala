@@ -44,13 +44,13 @@ class BoardServiceTest {
         assertEquals(6, newBoard.getPits()[index].getStones());
       }
     });
-    assertEquals(ONE, newBoard.getCurrentPlayer());
+    assertEquals(TWO, newBoard.getCurrentPlayer());
   }
 
   @Test
   void testNormalMoveForPlayerOne() {
 
-    when(boardHelperImpl.isPitNotEmpty(any(), anyInt())).thenReturn(true);
+    when(boardHelperImpl.isSelectedPitEmpty(any(), anyInt())).thenReturn(false);
     when(boardHelperImpl.isCaptureRule(any(), any(), anyInt())).thenReturn(false);
     when(boardHelperImpl.getNextPitByPlayer(any(), any(), anyInt())).thenReturn(new Pit(1));
     when(boardHelperImpl.getNextPlayer(any(), anyInt())).thenReturn(TWO);
@@ -68,7 +68,7 @@ class BoardServiceTest {
   @Test
   void shouldDoNothingDueToSelectedPitIsEmpty() {
 
-    when(boardHelperImpl.isPitNotEmpty(any(), anyInt())).thenReturn(false);
+    when(boardHelperImpl.isSelectedPitEmpty(any(), anyInt())).thenReturn(true);
 
     BoardUpdateRequest boardUpdateRequest =
         genrateBoardUpdateRequest(List.of(6, 6, 6, 6, 6, 6, 0, 6, 6, 6, 6, 6, 6, 0));
@@ -76,14 +76,14 @@ class BoardServiceTest {
     assertAll(() -> {
       assertEquals(6, board.getPits()[0].getStones());
       assertEquals(6, board.getPits()[1].getStones());
-      assertEquals(TWO, board.getCurrentPlayer());
+      assertEquals(ONE, board.getCurrentPlayer());
     });
   }
 
   @Test
   void shouldCoverApplyCaptureRule() {
 
-    when(boardHelperImpl.isPitNotEmpty(any(), anyInt())).thenReturn(true);
+    when(boardHelperImpl.isSelectedPitEmpty(any(), anyInt())).thenReturn(false);
     when(boardHelperImpl.isCaptureRule(any(), any(), anyInt())).thenReturn(true);
 
     doNothing().when(boardHelperImpl).applyCaptureRule(any(), any(), anyInt());

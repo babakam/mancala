@@ -5,7 +5,7 @@ import com.me.bol.assignment.mancala.domain.Player;
 
 public interface BoardHelperApi {
 
-  boolean isPitNotEmpty(Pit[] pits, int pitNumber);
+  boolean isSelectedPitEmpty(Pit[] pits, int pitNumber);
 
   Pit getNextPitByPlayer(Pit[] pits, Player player, int currentPitNumber);
 

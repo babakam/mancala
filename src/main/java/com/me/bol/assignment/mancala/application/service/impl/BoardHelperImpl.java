@@ -10,14 +10,16 @@ import static com.me.bol.assignment.mancala.domain.Player.TWO;
 import com.me.bol.assignment.mancala.application.service.BoardHelperApi;
 import com.me.bol.assignment.mancala.domain.Pit;
 import com.me.bol.assignment.mancala.domain.Player;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 @Service
+@Slf4j
 public class BoardHelperImpl implements BoardHelperApi {
 
   @Override
-  public boolean isPitNotEmpty(Pit[] pits, int pitNumber) {
-    return pits[pitNumber].getStones() != 0;
+  public boolean isSelectedPitEmpty(Pit[] pits, int pitNumber) {
+    return pits[pitNumber].getStones() == 0;
   }
 
   @Override
