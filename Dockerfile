@@ -2,6 +2,6 @@ FROM openjdk:17
 
 EXPOSE 5050
 
-COPY ./target/mancala-0.0.1-SNAPSHOT.war game.war
+COPY ./target/mancala.war mancala.war
 
-ENTRYPOINT ["java","-jar","game.war"]
+ENTRYPOINT ["java","-jar","mancala.war"]

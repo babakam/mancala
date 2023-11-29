@@ -1,9 +1,9 @@
 package com.me.bol.assignment.mancala.application.service;
 
-import static com.me.bol.assignment.mancala.domain.Board.PLAYER_ONE_BIG_PIT_INDEX;
-import static com.me.bol.assignment.mancala.domain.Board.PLAYER_TWO_BIG_PIT_INDEX;
-import static com.me.bol.assignment.mancala.domain.Player.ONE;
-import static com.me.bol.assignment.mancala.domain.Player.TWO;
+import static com.me.bol.assignment.mancala.domain.Board.DOWN_PLAYER_BIG_PIT_INDEX;
+import static com.me.bol.assignment.mancala.domain.Board.UP_PLAYER_BIG_PIT_INDEX;
+import static com.me.bol.assignment.mancala.domain.Player.DOWN;
+import static com.me.bol.assignment.mancala.domain.Player.UP;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -54,81 +54,81 @@ class BoardServiceTest_1_IT {
 
   private void fourthAssertion(Board updateBoard_4, Board updateBoard_3) {
     assertAll(() -> {
-      assertEquals(TWO, updateBoard_4.getCurrentPlayer());
+      assertEquals(UP, updateBoard_4.getCurrentPlayer());
       assertEquals(updateBoard_3.getPits()[0].getStones(), updateBoard_4.getPits()[0].getStones());
       assertEquals(updateBoard_3.getPits()[1].getStones(), updateBoard_4.getPits()[1].getStones());
       assertEquals(updateBoard_3.getPits()[2].getStones(), updateBoard_4.getPits()[2].getStones());
       assertEquals(updateBoard_3.getPits()[3].getStones(), updateBoard_4.getPits()[3].getStones());
       assertEquals(0, updateBoard_4.getPits()[4].getStones());
       assertEquals(updateBoard_3.getPits()[5].getStones() + 1, updateBoard_4.getPits()[5].getStones());
-      assertEquals(updateBoard_3.getPits()[PLAYER_ONE_BIG_PIT_INDEX].getStones() + 1, updateBoard_4.getPits()[PLAYER_ONE_BIG_PIT_INDEX].getStones());
+      assertEquals(updateBoard_3.getPits()[DOWN_PLAYER_BIG_PIT_INDEX].getStones() + 1, updateBoard_4.getPits()[DOWN_PLAYER_BIG_PIT_INDEX].getStones());
       assertEquals(updateBoard_3.getPits()[7].getStones() + 1, updateBoard_4.getPits()[7].getStones());
       assertEquals(updateBoard_3.getPits()[8].getStones() + 1, updateBoard_4.getPits()[8].getStones());
       assertEquals(updateBoard_3.getPits()[9].getStones() + 1, updateBoard_4.getPits()[9].getStones());
       assertEquals(updateBoard_3.getPits()[10].getStones(), updateBoard_4.getPits()[10].getStones());
       assertEquals(0, updateBoard_4.getPits()[11].getStones());
       assertEquals(updateBoard_3.getPits()[12].getStones(), updateBoard_4.getPits()[12].getStones());
-      assertEquals(updateBoard_3.getPits()[PLAYER_TWO_BIG_PIT_INDEX].getStones(), updateBoard_4.getPits()[PLAYER_TWO_BIG_PIT_INDEX].getStones());
+      assertEquals(updateBoard_3.getPits()[UP_PLAYER_BIG_PIT_INDEX].getStones(), updateBoard_4.getPits()[UP_PLAYER_BIG_PIT_INDEX].getStones());
     });
   }
 
   private void thirdAssertion(Board updateBoard_3, Board updateBoard_2) {
     assertAll(() -> {
-      assertEquals(ONE, updateBoard_3.getCurrentPlayer());
+      assertEquals(DOWN, updateBoard_3.getCurrentPlayer());
       assertEquals(updateBoard_2.getPits()[0].getStones() + 1, updateBoard_3.getPits()[0].getStones());
       assertEquals(updateBoard_2.getPits()[1].getStones() + 1, updateBoard_3.getPits()[1].getStones());
       assertEquals(updateBoard_2.getPits()[2].getStones() + 1, updateBoard_3.getPits()[2].getStones());
       assertEquals(updateBoard_2.getPits()[3].getStones(), updateBoard_3.getPits()[3].getStones());
       assertEquals(updateBoard_2.getPits()[4].getStones(), updateBoard_3.getPits()[4].getStones());
       assertEquals(updateBoard_2.getPits()[5].getStones(), updateBoard_3.getPits()[5].getStones());
-      assertEquals(updateBoard_2.getPits()[PLAYER_ONE_BIG_PIT_INDEX].getStones(), updateBoard_3.getPits()[PLAYER_ONE_BIG_PIT_INDEX].getStones());
+      assertEquals(updateBoard_2.getPits()[DOWN_PLAYER_BIG_PIT_INDEX].getStones(), updateBoard_3.getPits()[DOWN_PLAYER_BIG_PIT_INDEX].getStones());
       assertEquals(updateBoard_2.getPits()[7].getStones(), updateBoard_3.getPits()[7].getStones());
       assertEquals(updateBoard_2.getPits()[8].getStones(), updateBoard_3.getPits()[8].getStones());
       assertEquals(updateBoard_2.getPits()[9].getStones(), updateBoard_3.getPits()[9].getStones());
       assertEquals(updateBoard_2.getPits()[10].getStones(), updateBoard_3.getPits()[10].getStones());
       assertEquals(0, updateBoard_3.getPits()[11].getStones());
       assertEquals(updateBoard_2.getPits()[12].getStones() + 1, updateBoard_3.getPits()[12].getStones());
-      assertEquals(updateBoard_2.getPits()[PLAYER_TWO_BIG_PIT_INDEX].getStones() + 1, updateBoard_3.getPits()[PLAYER_TWO_BIG_PIT_INDEX].getStones());
+      assertEquals(updateBoard_2.getPits()[UP_PLAYER_BIG_PIT_INDEX].getStones() + 1, updateBoard_3.getPits()[UP_PLAYER_BIG_PIT_INDEX].getStones());
     });
   }
 
   private void secondAssertion(Board updateBoard_2, Board updateBoard_1) {
     assertAll(() -> {
-      assertEquals(TWO, updateBoard_2.getCurrentPlayer());
+      assertEquals(UP, updateBoard_2.getCurrentPlayer());
       assertEquals(0, updateBoard_2.getPits()[0].getStones());
       assertEquals(updateBoard_1.getPits()[1].getStones() + 1, updateBoard_2.getPits()[1].getStones());
       assertEquals(updateBoard_1.getPits()[2].getStones() + 1, updateBoard_2.getPits()[2].getStones());
       assertEquals(updateBoard_1.getPits()[3].getStones() + 1, updateBoard_2.getPits()[3].getStones());
       assertEquals(updateBoard_1.getPits()[4].getStones() + 1, updateBoard_2.getPits()[4].getStones());
       assertEquals(updateBoard_1.getPits()[5].getStones(), updateBoard_2.getPits()[5].getStones());
-      assertEquals(updateBoard_1.getPits()[PLAYER_ONE_BIG_PIT_INDEX].getStones(), updateBoard_2.getPits()[PLAYER_ONE_BIG_PIT_INDEX].getStones());
+      assertEquals(updateBoard_1.getPits()[DOWN_PLAYER_BIG_PIT_INDEX].getStones(), updateBoard_2.getPits()[DOWN_PLAYER_BIG_PIT_INDEX].getStones());
       assertEquals(0, updateBoard_2.getPits()[7].getStones());
       assertEquals(updateBoard_1.getPits()[8].getStones(), updateBoard_2.getPits()[8].getStones());
       assertEquals(updateBoard_1.getPits()[9].getStones(), updateBoard_2.getPits()[9].getStones());
       assertEquals(updateBoard_1.getPits()[10].getStones(), updateBoard_2.getPits()[10].getStones());
       assertEquals(updateBoard_1.getPits()[11].getStones(), updateBoard_2.getPits()[11].getStones());
       assertEquals(updateBoard_1.getPits()[12].getStones(), updateBoard_2.getPits()[12].getStones());
-      assertEquals(updateBoard_1.getPits()[PLAYER_TWO_BIG_PIT_INDEX].getStones(), updateBoard_2.getPits()[PLAYER_TWO_BIG_PIT_INDEX].getStones());
+      assertEquals(updateBoard_1.getPits()[UP_PLAYER_BIG_PIT_INDEX].getStones(), updateBoard_2.getPits()[UP_PLAYER_BIG_PIT_INDEX].getStones());
     });
   }
 
   private void firstAssertation(Board updateBoard_1, Board newBoard) {
     assertAll(() -> {
-      assertEquals(ONE, updateBoard_1.getCurrentPlayer());
+      assertEquals(DOWN, updateBoard_1.getCurrentPlayer());
       assertEquals(newBoard.getPits()[0].getStones(), updateBoard_1.getPits()[0].getStones());
       assertEquals(newBoard.getPits()[1].getStones(), updateBoard_1.getPits()[1].getStones());
       assertEquals(newBoard.getPits()[2].getStones(), updateBoard_1.getPits()[2].getStones());
       assertEquals(newBoard.getPits()[3].getStones(), updateBoard_1.getPits()[3].getStones());
       assertEquals(newBoard.getPits()[4].getStones(), updateBoard_1.getPits()[4].getStones());
       assertEquals(newBoard.getPits()[5].getStones(), updateBoard_1.getPits()[5].getStones());
-      assertEquals(newBoard.getPits()[PLAYER_ONE_BIG_PIT_INDEX].getStones(), updateBoard_1.getPits()[PLAYER_ONE_BIG_PIT_INDEX].getStones());
+      assertEquals(newBoard.getPits()[DOWN_PLAYER_BIG_PIT_INDEX].getStones(), updateBoard_1.getPits()[DOWN_PLAYER_BIG_PIT_INDEX].getStones());
       assertEquals(0, updateBoard_1.getPits()[7].getStones());
       assertEquals(newBoard.getPits()[8].getStones() + 1, updateBoard_1.getPits()[8].getStones());
       assertEquals(newBoard.getPits()[9].getStones() + 1, updateBoard_1.getPits()[9].getStones());
       assertEquals(newBoard.getPits()[10].getStones() + 1, updateBoard_1.getPits()[10].getStones());
       assertEquals(newBoard.getPits()[11].getStones() + 1, updateBoard_1.getPits()[11].getStones());
       assertEquals(newBoard.getPits()[12].getStones(), updateBoard_1.getPits()[12].getStones());
-      assertEquals(newBoard.getPits()[PLAYER_TWO_BIG_PIT_INDEX].getStones(), updateBoard_1.getPits()[PLAYER_TWO_BIG_PIT_INDEX].getStones());
+      assertEquals(newBoard.getPits()[UP_PLAYER_BIG_PIT_INDEX].getStones(), updateBoard_1.getPits()[UP_PLAYER_BIG_PIT_INDEX].getStones());
     });
   }
 }

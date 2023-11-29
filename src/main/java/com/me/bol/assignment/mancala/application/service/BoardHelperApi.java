@@ -7,7 +7,7 @@ public interface BoardHelperApi {
 
   boolean isSelectedPitEmpty(Pit[] pits, int pitNumber);
 
-  Pit getNextPitByPlayer(Pit[] pits, Player player, int currentPitNumber);
+  int getNextPitIndexByPlayer(Pit[] pits, Player player, int currentPitNumber);
 
   boolean isCaptureRule(Pit[] pits, Player player, int currentPitNumber);
 

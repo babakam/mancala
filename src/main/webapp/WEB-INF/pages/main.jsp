@@ -60,7 +60,7 @@
   }
 
   function giveMeNextPlayer() {
-    return thisCurrentPlayer === 'ONE' ? 'ONE' : 'TWO';
+    return thisCurrentPlayer === 'DOWN' ? 'DOWN' : 'UP';
   }
 
   function createBoard() {
@@ -88,12 +88,12 @@
   }
 
   function canPlayerOne(id) {
-    return id >= 0 && id <= 5 && thisCurrentPlayer === 'ONE' && gameIsFinished === false;
+    return id >= 0 && id <= 5 && thisCurrentPlayer === 'DOWN' && gameIsFinished === false;
 
   }
 
   function canPlayerTwo(id) {
-    return id >= 7 && id <= 12 && thisCurrentPlayer === 'TWO' && gameIsFinished === false;
+    return id >= 7 && id <= 12 && thisCurrentPlayer === 'UP' && gameIsFinished === false;
   }
 
   function giveMeNewBoard() {
@@ -164,12 +164,7 @@
     obj = JSON.parse(data.toString());
     thisCurrentPlayer = obj.nextPlayer;
     gameIsFinished = obj.finished
-    if (thisCurrentPlayer === 'ONE') {
-      $('#playerTurn').text('DOWN')
-    } else {
-      $('#playerTurn').text('UP')
-
-    }
+    $('#playerTurn').text(thisCurrentPlayer)
 
     $.each(obj.pits, function (index, element) {
       $('.pot#' + index).html(element.stones)
@@ -183,7 +178,7 @@
       if (obj.pits[13].stones < obj.pits[6].stones) {
         winner = 'Down'
       }
-      alert("Up Player Score: " + obj.pits[13].stones + " & Down Player Score: " + obj.pits[6].stones + " Winner is: " + winner);
+      alert("Up Player Score: " + obj.pits[13].stones + " & Down Player Score: " + obj.pits[6].stones + ". The Winner is: !" + winner + "!");
     }
 
   }

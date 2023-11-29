@@ -42,7 +42,7 @@ class BoardRestControllerTest {
       assertEquals(14, boardDto.getPits().size());
       assertEquals(0, boardDto.getPits().get(6).getStones());
       assertEquals(0, boardDto.getPits().get(13).getStones());
-      assertEquals("TWO", boardDto.getNextPlayer());
+      assertEquals("UP", boardDto.getNextPlayer());
       assertFalse(boardDto.isFinished());
     });
   }
@@ -57,7 +57,7 @@ class BoardRestControllerTest {
 
     var firstOne = mapper.readValue(firstMockResult.getResponse().getContentAsString(), BoardDto.class);
 
-    var updateOne = UpdateBoardDto.builder().pits(firstOne.getPits()).currentPLayer("ONE").finished(false).build();
+    var updateOne = UpdateBoardDto.builder().pits(firstOne.getPits()).currentPLayer("DOWN").finished(false).build();
 
     var secondMockResult = mockMvc.perform(put("/update/1")
             .contentType(MediaType.APPLICATION_JSON)

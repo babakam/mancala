@@ -1,8 +1,8 @@
 package com.me.bol.assignment.mancala.application.service;
 
-import static com.me.bol.assignment.mancala.domain.Board.PLAYER_TWO_BIG_PIT_INDEX;
-import static com.me.bol.assignment.mancala.domain.Player.ONE;
-import static com.me.bol.assignment.mancala.domain.Player.TWO;
+import static com.me.bol.assignment.mancala.domain.Board.UP_PLAYER_BIG_PIT_INDEX;
+import static com.me.bol.assignment.mancala.domain.Player.DOWN;
+import static com.me.bol.assignment.mancala.domain.Player.UP;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -26,7 +26,7 @@ class BoardServiceTest_2_IT {
         .selectedPitNumber(9)
         .build());
 
-    assertEquals(TWO, updateBoard_1.getCurrentPlayer());
+    assertEquals(UP, updateBoard_1.getCurrentPlayer());
   }
 
   @Test
@@ -43,7 +43,7 @@ class BoardServiceTest_2_IT {
         .selectedPitNumber(2)
         .build());
 
-    assertEquals(ONE, updateBoard_2.getCurrentPlayer());
+    assertEquals(DOWN, updateBoard_2.getCurrentPlayer());
   }
 
   @Test
@@ -66,7 +66,7 @@ class BoardServiceTest_2_IT {
         .build());
 
     assertAll(() ->
-        assertEquals(2, updateBoard_3.getPits()[PLAYER_TWO_BIG_PIT_INDEX].getStones())
+        assertEquals(2, updateBoard_3.getPits()[UP_PLAYER_BIG_PIT_INDEX].getStones())
     );
   }
 }

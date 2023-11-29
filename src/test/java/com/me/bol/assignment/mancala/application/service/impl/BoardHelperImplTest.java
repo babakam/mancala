@@ -1,11 +1,11 @@
 package com.me.bol.assignment.mancala.application.service.impl;
 
 import static com.me.bol.assignment.mancala.domain.Board.PITS_MAX_SIZE;
-import static com.me.bol.assignment.mancala.domain.Board.PLAYER_ONE_BIG_PIT_INDEX;
-import static com.me.bol.assignment.mancala.domain.Board.PLAYER_TWO_BIG_PIT_INDEX;
+import static com.me.bol.assignment.mancala.domain.Board.DOWN_PLAYER_BIG_PIT_INDEX;
+import static com.me.bol.assignment.mancala.domain.Board.UP_PLAYER_BIG_PIT_INDEX;
 import static com.me.bol.assignment.mancala.domain.Board.START_PIT_INDEX;
-import static com.me.bol.assignment.mancala.domain.Player.ONE;
-import static com.me.bol.assignment.mancala.domain.Player.TWO;
+import static com.me.bol.assignment.mancala.domain.Player.DOWN;
+import static com.me.bol.assignment.mancala.domain.Player.UP;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -40,53 +40,53 @@ class BoardHelperImplTest {
   @Test
   void shouldReturnBigBoxForPlayerOne() {
     var pits = generatePits(List.of(1, 1, 1, 1, 0, 1, 100, 1, 1, 0, 1, 1, 1, 1));
-    var nextPitByPlayer = boardHelperImpl.getNextPitByPlayer(pits, ONE, 5);
+    var nextPitByPlayer = boardHelperImpl.getNextPitIndexByPlayer(pits, DOWN, 5);
     assertAll(() -> {
-      assertEquals(pits[PLAYER_ONE_BIG_PIT_INDEX].getStones(), nextPitByPlayer.getStones());
-      assertEquals(100, nextPitByPlayer.getStones());
+      assertEquals(pits[DOWN_PLAYER_BIG_PIT_INDEX].getStones(), pits[nextPitByPlayer].getStones());
+      assertEquals(100, pits[nextPitByPlayer].getStones());
     });
   }
 
   @Test
   void shouldReturnBigBoxForPlayerTwo() {
     var pits = generatePits(List.of(1, 1, 1, 1, 0, 1, 100, 1, 1, 0, 1, 1, 1, 500));
-    var nextPitByPlayer = boardHelperImpl.getNextPitByPlayer(pits, TWO, 12);
+    var nextPitByPlayer = boardHelperImpl.getNextPitIndexByPlayer(pits, UP, 12);
     assertAll(() -> {
-      assertEquals(pits[PLAYER_TWO_BIG_PIT_INDEX].getStones(), nextPitByPlayer.getStones());
-      assertEquals(500, nextPitByPlayer.getStones());
+      assertEquals(pits[UP_PLAYER_BIG_PIT_INDEX].getStones(), pits[nextPitByPlayer].getStones());
+      assertEquals(500, pits[nextPitByPlayer].getStones());
     });
   }
 
   @Test
   void shouldReturnStartPitIndex() {
     var pits = generatePits(List.of(70, 1, 1, 1, 0, 1, 100, 1, 1, 0, 1, 1, 1, 500));
-    var nextPitByPlayerTwo = boardHelperImpl.getNextPitByPlayer(pits, TWO, 13);
-    var nextPitByPlayerOne = boardHelperImpl.getNextPitByPlayer(pits, ONE, 13);
+    var nextPitByPlayerTwo = boardHelperImpl.getNextPitIndexByPlayer(pits, UP, 13);
+    var nextPitByPlayerOne = boardHelperImpl.getNextPitIndexByPlayer(pits, DOWN, 13);
     assertAll(() -> {
-      assertEquals(pits[START_PIT_INDEX].getStones(), nextPitByPlayerTwo.getStones());
-      assertEquals(70, nextPitByPlayerTwo.getStones());
-      assertEquals(pits[START_PIT_INDEX].getStones(), nextPitByPlayerOne.getStones());
-      assertEquals(70, nextPitByPlayerOne.getStones());
+      assertEquals(pits[START_PIT_INDEX].getStones(), pits[nextPitByPlayerTwo].getStones());
+      assertEquals(70, pits[nextPitByPlayerTwo].getStones());
+      assertEquals(pits[START_PIT_INDEX].getStones(), pits[nextPitByPlayerOne].getStones());
+      assertEquals(70, pits[nextPitByPlayerOne].getStones());
     });
   }
 
   @Test
   void shouldNotGoToBigPitForPlayerOne() {
     var pits = generatePits(List.of(1, 1, 1, 1, 0, 1, 100, 7, 1, 0, 1, 1, 1, 500));
-    var nextPitByPlayer = boardHelperImpl.getNextPitByPlayer(pits, TWO, 5);
+    var nextPitByPlayer = boardHelperImpl.getNextPitIndexByPlayer(pits, UP, 5);
     assertAll(() -> {
-      assertEquals(pits[PLAYER_ONE_BIG_PIT_INDEX + 1].getStones(), nextPitByPlayer.getStones());
-      assertEquals(7, nextPitByPlayer.getStones());
+      assertEquals(pits[DOWN_PLAYER_BIG_PIT_INDEX].getStones(), pits[nextPitByPlayer].getStones());
+      assertEquals(100,pits[nextPitByPlayer].getStones());
     });
   }
 
   @Test
   void shouldNotGoToBigPitForPlayerTwo() {
     var pits = generatePits(List.of(17, 1, 1, 1, 0, 1, 100, 7, 1, 0, 1, 1, 1, 500));
-    var nextPitByPlayer = boardHelperImpl.getNextPitByPlayer(pits, ONE, 12);
+    var nextPitByPlayer = boardHelperImpl.getNextPitIndexByPlayer(pits, DOWN, 12);
     assertAll(() -> {
-      assertEquals(pits[START_PIT_INDEX].getStones(), nextPitByPlayer.getStones());
-      assertEquals(17, nextPitByPlayer.getStones());
+      assertEquals(pits[UP_PLAYER_BIG_PIT_INDEX].getStones(), pits[nextPitByPlayer].getStones());
+      assertEquals(500, pits[nextPitByPlayer].getStones());
     });
   }
 
@@ -96,33 +96,33 @@ class BoardHelperImplTest {
     assertAll(() -> {
       assertEquals(0, boardHelperImpl.getOppositePitNumber(12));
       assertEquals(8, boardHelperImpl.getOppositePitNumber(4));
-      assertEquals(-1, boardHelperImpl.getOppositePitNumber(PLAYER_ONE_BIG_PIT_INDEX));
-      assertEquals(-1, boardHelperImpl.getOppositePitNumber(PLAYER_TWO_BIG_PIT_INDEX));
+      assertEquals(-1, boardHelperImpl.getOppositePitNumber(DOWN_PLAYER_BIG_PIT_INDEX));
+      assertEquals(-1, boardHelperImpl.getOppositePitNumber(UP_PLAYER_BIG_PIT_INDEX));
     });
   }
 
   @Test
   void shouldBeCaptureRule() {
     var pits1 = generatePits(List.of(0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 10, 0, 0, 0));
-    assertTrue(boardHelperImpl.isCaptureRule(pits1, ONE, 1));
+    assertTrue(boardHelperImpl.isCaptureRule(pits1, DOWN, 1));
 
     var pits2 = generatePits(List.of(0, 0, 2, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0));
-    assertTrue(boardHelperImpl.isCaptureRule(pits2, TWO, 8));
+    assertTrue(boardHelperImpl.isCaptureRule(pits2, UP, 8));
   }
 
   @Test
   void shouldApplyCaptureRule() {
     var pits1 = generatePits(List.of(0, 1, 0, 0, 0, 0, 20, 0, 0, 0, 10, 0, 0, 0));
-    assertTrue(boardHelperImpl.isCaptureRule(pits1, ONE, 1));
-    boardHelperImpl.applyCaptureRule(pits1, ONE, 1);
-    assertEquals(31, pits1[PLAYER_ONE_BIG_PIT_INDEX].getStones());
+    assertTrue(boardHelperImpl.isCaptureRule(pits1, DOWN, 1));
+    boardHelperImpl.applyCaptureRule(pits1, DOWN, 1);
+    assertEquals(31, pits1[DOWN_PLAYER_BIG_PIT_INDEX].getStones());
     assertEquals(0, pits1[11].getStones());
     assertEquals(0, pits1[1].getStones());
 
     var pits2 = generatePits(List.of(5, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 20));
-    assertTrue(boardHelperImpl.isCaptureRule(pits2, TWO, 11));
-    boardHelperImpl.applyCaptureRule(pits2, TWO, 11);
-    assertEquals(26, pits2[PLAYER_TWO_BIG_PIT_INDEX].getStones());
+    assertTrue(boardHelperImpl.isCaptureRule(pits2, UP, 11));
+    boardHelperImpl.applyCaptureRule(pits2, UP, 11);
+    assertEquals(26, pits2[UP_PLAYER_BIG_PIT_INDEX].getStones());
     assertEquals(0, pits2[0].getStones());
     assertEquals(0, pits2[11].getStones());
   }
@@ -140,18 +140,18 @@ class BoardHelperImplTest {
 
   @Test
   void shouldOneTheNextPlayer() {
-    assertEquals(ONE, boardHelperImpl.getNextPlayer(TWO, 4));
-    assertEquals(ONE, boardHelperImpl.getNextPlayer(TWO, PLAYER_ONE_BIG_PIT_INDEX));
-    assertEquals(ONE, boardHelperImpl.getNextPlayer(TWO, 9));
-    assertEquals(ONE, boardHelperImpl.getNextPlayer(ONE, PLAYER_ONE_BIG_PIT_INDEX));
+    assertEquals(DOWN, boardHelperImpl.getNextPlayer(UP, 4));
+    assertEquals(DOWN, boardHelperImpl.getNextPlayer(UP, DOWN_PLAYER_BIG_PIT_INDEX));
+    assertEquals(DOWN, boardHelperImpl.getNextPlayer(UP, 9));
+    assertEquals(DOWN, boardHelperImpl.getNextPlayer(DOWN, DOWN_PLAYER_BIG_PIT_INDEX));
   }
 
   @Test
   void shouldTwoTheNextPlayer() {
-    assertEquals(TWO, boardHelperImpl.getNextPlayer(ONE, 4));
-    assertEquals(TWO, boardHelperImpl.getNextPlayer(ONE, PLAYER_TWO_BIG_PIT_INDEX));
-    assertEquals(TWO, boardHelperImpl.getNextPlayer(ONE, 9));
-    assertEquals(TWO, boardHelperImpl.getNextPlayer(TWO, PLAYER_TWO_BIG_PIT_INDEX));
+    assertEquals(UP, boardHelperImpl.getNextPlayer(DOWN, 4));
+    assertEquals(UP, boardHelperImpl.getNextPlayer(DOWN, UP_PLAYER_BIG_PIT_INDEX));
+    assertEquals(UP, boardHelperImpl.getNextPlayer(DOWN, 9));
+    assertEquals(UP, boardHelperImpl.getNextPlayer(UP, UP_PLAYER_BIG_PIT_INDEX));
   }
 
   private Pit[] generatePits(List<Integer> stoneValues) {
