@@ -12,7 +12,7 @@ These instructions will give you a copy of the project up and running on your lo
 
 ### Prerequisites / Test and Deploy
 
-Requirements for the software and other tools to build and test. Choosing one of them could cause you to ignore the other one.
+Requirements for the software and other tools to build and test.
 - [JDK 17] (https://www.openlogic.com/openjdk-downloads). 
   - After downloading and installing the JDK, make sure to add your JAVA_HOME to your path
   - To set your JAVA_HOME follow this link https://www.baeldung.com/java-home-on-windows-7-8-10-mac-os-x-linux
