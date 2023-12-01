@@ -45,12 +45,6 @@ docker run -d -p [your_proper_port]:5050 mancala
   - WEB
 - Lombok 
 
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
 ## Usage
 The project is just an assignment for bol.com
 
@@ -61,7 +55,7 @@ If you face the problem or have any questions please contact me via babak.azarmi
 The application has been created by Babak Azarmi. (babak.azarmi@yahoo.com)
 
 ## License
-This project is free for every one. 
+This project is free for everyone. 
 
 ## Project status
-It's an assignment, and I don't think so there is a plan to improve and extend the project
+It's an assignment, and I don't think there is a plan to improve and extend the project
